@@ -1,17 +1,34 @@
 <template>
   <div class="todos">
-    <h1>Here Is todos</h1>
+    <ul>
+      <li v-for="todo in todos" :key="todo.title">
+        <div class="todo">
+          {{ todo.title }}
+        </div>  
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
   name: 'todos',
-  components: {
-    HelloWorld,
-  },
+  data () {
+    return {
+      todos: [{
+        title: 'Just Start...',
+        isDone: false
+      }]
+    }
+  }
 };
 </script>
+<style scoped lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC');
+
+.todos {
+    border: solid 1px black;
+}
+</style>

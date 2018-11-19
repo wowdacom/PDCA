@@ -100,8 +100,12 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC');
 
 .Header {
-    width: calc(100% - 8px);
+    width: 100%;
     font-family: 'Noto Sans TC', sans-serif;
+    background-color: #fff;
+    -webkit-box-shadow:0 1px 4px rgba(white, 0.3), 0 0 40px rgba(white, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(white, 0.3), 0 0 40px rgba(white, 0.1) inset;
+            box-shadow:0 1px 4px rgba(white, 0.3), 0 0 40px rgba(white, 0.1) inset;
     .sub-header {
         padding: 0px 10px;
         line-height: 50px;

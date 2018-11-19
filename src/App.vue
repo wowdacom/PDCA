@@ -2,9 +2,8 @@
   <div id="app">
     <Header></Header>
     <div class="container">
-
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
 <script>
@@ -26,9 +25,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
+  min-height: 100vh;
+  background-color: black;
+  color: white;
   .container {
-    padding: 10px;
+    background-color: inherit;
+    color: inherit;
   }
 }
 </style>
