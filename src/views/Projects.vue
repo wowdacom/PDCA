@@ -5,13 +5,14 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
 
 export default {
-  name: 'moods',
-  components: {
-    HelloWorld,
-  },
+  name: 'projects',
 };
 </script>
+
+<style lang="scss" scoped>
+  .projects {
+    padding: 20px;
+  }
+</style>

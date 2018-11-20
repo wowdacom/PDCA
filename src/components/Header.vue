@@ -5,7 +5,14 @@
             <div class="theme-title">{{ currentTitle.name }}</div>
         </div>
         <div class="sub-header-right">
-
+            <ul class="options">
+                <li class="option"
+                    :key="option.id"
+                    v-for="option in options[currentTitle.id]"
+                >
+                    <img :src="option.icon" alt="">
+                </li>
+            </ul>
         </div>
     </div> 
     <div class="titles-wrapper">
@@ -25,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Header',
   data () {
@@ -62,19 +68,44 @@ export default {
                 isActive: false
               }
           ],
-          functions: {
-            'add-list': {
-                icon: require("@/assets/images/icons/add-todo.svg")
-            },
-            'add-project': {
-                icon: require("@/assets/images/icons/add-project.svg")
-            },
-            'setting': {
-                icon: require("@/assets/images/icons/care.svg")
-            }
+          options: {
+              todos: [
+                { 
+                    id: "add-list",
+                    name:'add-list',
+                    icon: require("@/assets/images/icons/addtodo.svg")
+                },
+                {
+                    id: 'sorting',
+                    name: 'sorting',
+                    icon: require("@/assets/images/icons/sorting.svg")
+                },
+                {
+                    id: 'setting',
+                    name: 'setting',
+                    icon: require("@/assets/images/icons/settings.svg")
+                }
+            ],
+            projects: [
+                {
+                    id: 'add-project',
+                    name: 'add-project',
+                    icon: require("@/assets/images/icons/addproject.svg")
+                }
+            ],
+            ideas: [],
+            moods: [],
+            more: [
+                {
+                    id: 'setting',
+                    name: 'setting',
+                    icon: require("@/assets/images/icons/settings.svg")
+                }
+            ]
           },
+          projects : [],
           currentTitle: {
-             id: "todo",
+             id: "todos",
              name: "待辦事項",
              icon: "" 
           }
@@ -93,6 +124,7 @@ export default {
       }
   }
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -117,7 +149,28 @@ export default {
             }      
         }
         .sub-header-right {
-        
+            .options {
+               position: relative;
+               display: flex;
+               width: 100%;
+               animation: slideIn 1s cubic-bezier(0.075, 0.82, 0.165, 1) 1;
+                .option {
+                    
+                    font-size: 18px;
+                    color: black;
+                    img {
+                        width: 25px;
+                        height: auto;
+                        vertical-align: middle;
+                        padding: 0 10px;
+                    }
+                }
+                @keyframes slideIn {
+                    from {right: -100%;}
+                    to {right: 0;}
+                }
+            }
+            
         }
     }
     
@@ -129,7 +182,8 @@ export default {
             justify-content: center;
             flex-direction: column;
             text-align: center;
-            padding: 2.5% 5%; 
+            padding: 2.5% 5%;
+            transform: all 1s ;
             img {
                 width: 100%;
                 height: auto;
