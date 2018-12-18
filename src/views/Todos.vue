@@ -7,6 +7,10 @@
         </div>  
       </li>
     </ul>
+    <div class="addTodo">
+      <input type="text" v-model="currentTodo">
+      <span @click="postTodo">Go</span>
+    </div>
   </div>
 </template>
 
@@ -17,45 +21,67 @@ export default {
   name: 'todos',
   data () {
     return {
+      firebase: {
+        url: 'https://gettingdone-6dd83.firebaseio.com/'
+      },
+      currentTodo: '',
       todos: [
         {
-          title: 'Just Start...',
+          title: 'Never start something you are not willing to finish...',
           isDone: false
-        },
-        {
-          title: '接 Firebase 存 todo 資料',
-          isDone: false
-        },
-        {
-          title: '<無印良品>買筆記本寫開發筆記跟做卡片材料',
-          isDone: false
-        },
-        {
-          title: '專案管理介面設計，進度條',
-          isDone: false
-        },
-        {
-          title: 'Vue 讀書會章節準備',
-          isDone: false
-        },
-        {
-          title: 'Science of Well Being 第七章計畫',
-          isDone: false
-        },
-        {
-          title: 'Long Press Cancel It',
-          isDone: true
-        },
-        {
-          title: 'Mindset with MarkDown https://github.com/miaolz123/vue-markdown',
-          isDone: true
         }
       ],
       timerID: 0,
       timer: 0
     }
   },
+  mounted () {
+    this.getTodo()
+  },
   methods: {
+    postTodo () {
+      let vm = this
+      let authUrl = `${vm.firebase.url}todos.json` 
+      let todo = {
+        title: vm.currentTodo,
+        isDone: false
+      }
+      if(vm.currentTodo === ''){
+        return
+      }
+      fetch(authUrl,
+        {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(todo)
+        })
+        .then(function(res){
+            vm.currentTodo = ''
+            vm.getTodo()
+        })
+        .catch(function(res){ console.log(res) })
+        console.log("post")
+    },
+    getTodo () {
+      let vm = this
+      let authUrl = `${this.firebase.url}todos.json` 
+      let url = this.firebase.url
+      fetch(authUrl, {method: 'get'})
+        .then(function(res) {
+          return res.json();
+        })
+        .then(function(res) {
+          let lists = []
+          let keys = Object.keys(res)
+          keys.forEach((key)=>{
+            lists.push({ ...res[key], id: key })
+          })
+          vm.todos = lists
+        });
+    },
     pressStart (value) {
       let vm = this
       this.timer = 0
@@ -79,7 +105,9 @@ export default {
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC');
 
-.todos {    
+.todos {
+  position: relative;
+  min-height: 100vh;
     .paper {
       .memo {
         border: solid 1px white;
@@ -90,5 +118,25 @@ export default {
         background-color: black;
       }
     }
+  .addTodo {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(white, 1);
+    input {
+      width: 75%;
+      line-height: 15px;
+      padding: 10px;
+      margin: 10px 5px;
+      border: solid 1px rgba(black, 0.1);
+      border-radius: 10px;
+      padding-left: 5px;
+      background-color: rgba(white, 0.1);
+    }
+    span {
+      color: black;
+    }
+  }
 }
 </style>

@@ -3,7 +3,9 @@
     <Header></Header>
     <div class="container">
       <transition mode="out-in" name="fade">
-        <router-view/>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
       </transition>
     </div>
   </div>

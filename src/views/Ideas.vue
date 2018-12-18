@@ -1,8 +1,10 @@
 <template>
   <div class="ideas">
     <!-- <textarea rows="4" cols="50" v-model="memos"></textarea> -->
-    <textarea class="muji" v-model="message" placeholder="#What's On Your Mind?"></textarea>
-    <vue-markdown class="demo" style="text-align: left" :source="message"></vue-markdown>
+
+      <textarea class="muji" v-model="message" placeholder="#What's On Your Mind?"></textarea>
+
+    <vue-markdown :emoji="false" class="demo" style="text-align: left" :source="message"></vue-markdown>
   </div>
 </template>
 

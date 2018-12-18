@@ -1,6 +1,6 @@
 {
-  "name": "unlockit",
-  "short_name": "unlockit",
+  "name": "Getting Things Done",
+  "short_name": "Finished",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -16,5 +16,7 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "theme_color": "#4DBA87",
+  "orientation": "portrait-primary",
+  "description": "Never start a thing which you won't finish it!"
 }
